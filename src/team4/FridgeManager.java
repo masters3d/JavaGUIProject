@@ -11,13 +11,7 @@ package team4;
  * @author FRANCESKA S ONG
  * @author JOSE E JIMENEZ
  */
-public class Project4 {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class FridgeManager {
     
 }
