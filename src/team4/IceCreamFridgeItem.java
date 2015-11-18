@@ -12,6 +12,15 @@ package team4;
  * @author JOSE E JIMENEZ
  */
 
-public class FridgeManager {
+public class IceCreamFridgeItem {
+    
+    private double costPerLiter;
+    
+    private double salePricePerLiter;;
+    
+    // Price per litter
+    private double price;
+    
+    
     
 }

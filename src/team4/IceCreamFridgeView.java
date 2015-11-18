@@ -7,8 +7,10 @@ package team4;
 
 /**
  *
- * @author cheyo
+ * @author SZE LOK TAM 
+ * @author FRANCESKA S ONG
+ * @author JOSE E JIMENEZ
  */
-public class FridgeView {
+public class IceCreamFridgeView {
     
 }

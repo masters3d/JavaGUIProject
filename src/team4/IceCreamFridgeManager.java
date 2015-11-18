@@ -12,6 +12,6 @@ package team4;
  * @author JOSE E JIMENEZ
  */
 
-public class IceCream {
+public class IceCreamFridgeManager {
     
 }
