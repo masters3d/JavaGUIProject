@@ -16,11 +16,12 @@ public class IceCreamFridgeItem {
     
     private double costPerLiter;
     
-    private double salePricePerLiter;;
+    private double salePricePerLiter;
     
     // Price per litter
     private double price;
     
+    private String iceCreamFlavor;
     
     
 }

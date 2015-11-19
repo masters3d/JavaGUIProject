@@ -18,6 +18,10 @@ public class IceCreamFridgeProject {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        IceCreamFridgeView view = new IceCreamFridgeView("Ice Cream");
+        view.pack();
+        view.setLocation(200, 200);
+        view.setVisible(true);
     }
     
 }
