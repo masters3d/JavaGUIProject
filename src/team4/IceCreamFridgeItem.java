@@ -28,6 +28,13 @@ public class IceCreamFridgeItem {
         return costPerLiter*2.5;
     }
     
+    public IceCreamFridgeItem() {
+        this.costPerLiter = 1;
+        this.iceCreamFlavor = "Chocolate";
+        this.salePricePerLiter = setStaringSalesPrice();
+    }
+    
+    
     public IceCreamFridgeItem(double costPerLiter, String flavor) {
         this.costPerLiter = costPerLiter;
         this.iceCreamFlavor = flavor;
