@@ -5,6 +5,8 @@
  */
 package team4;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author SZE LOK TAM 
@@ -13,5 +15,9 @@ package team4;
  */
 
 public class IceCreamFridgeManager {
+    
+   
+    private ArrayList<IceCreamFridgeItem> iceCreamList;
+
     
 }
