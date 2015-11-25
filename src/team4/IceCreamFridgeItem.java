@@ -5,6 +5,7 @@
  */
 package team4;
 
+import java.io.Serializable;
 import static java.lang.Math.abs;
 
 /**
@@ -16,7 +17,7 @@ import static java.lang.Math.abs;
  * @author JOSE E JIMENEZ
  */
 
-public class IceCreamFridgeItem {
+public class IceCreamFridgeItem implements Comparable, Serializable {
     
     private double costPerLiter;
     private double salePricePerLiter;
@@ -72,6 +73,15 @@ public class IceCreamFridgeItem {
         
         stockInLiters += value;
         return true;
+    }
+
+    @Override
+    public int compareTo(Object obj) {
+        if (obj != null && obj instanceof IceCreamFridgeItem) {
+            IceCreamFridgeItem other = (IceCreamFridgeItem) obj;
+            return iceCreamFlavor.compareTo(other.iceCreamFlavor);
+        }
+        return 1;
     }
         
     

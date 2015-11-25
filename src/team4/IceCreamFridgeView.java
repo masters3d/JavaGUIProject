@@ -16,6 +16,7 @@ import javax.swing.*;
  */
 public class IceCreamFridgeView extends JFrame {
     private Container container;
+    private IceCreamFridgeManager iceCreams;
     private IceCreamFridgeItem flavors;
     private JComboBox<IceCreamFridgeItem> itemNames;
     private JTextField txtFlavors;
@@ -31,15 +32,17 @@ public class IceCreamFridgeView extends JFrame {
     {
         super(title);
         flavors = new IceCreamFridgeItem();
+        iceCreams = new IceCreamFridgeManager();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         container = this.getContentPane();
+        
         addWindowComponents();
         
     }
     
     private void addWindowComponents() {
         // make combo box
-        itemNames = new JComboBox<>();
+        itemNames = new JComboBox<>(iceCreams.getSortedArray());
         container.add(itemNames, BorderLayout.NORTH);
         // make buttons
         JPanel pnlButtons = new JPanel();
