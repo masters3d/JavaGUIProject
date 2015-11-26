@@ -9,44 +9,46 @@ import java.io.Serializable;
 import static java.lang.Math.abs;
 
 /**
- *  Single-item instantiable class for IceCreamFridgeProject, representing one type of Ice Cream
-
- * 
- * @author SZE LOK TAM 
+ * Single-item instantiable class for IceCreamFridgeProject, representing one
+ * type of Ice Cream
+ *
+ *
+ * @author SZE LOK TAM
  * @author FRANCESKA S ONG
  * @author JOSE E JIMENEZ
  */
-
 public class IceCreamFridgeItem implements Comparable, Serializable {
-    
+
+    private String iceCreamFlavor;
+    private double stockInLiters;
     private double costPerLiter;
     private double salePricePerLiter;
-    private double stockInLiters;
-    private String iceCreamFlavor;
 
-
-    private double setStaringSalesPrice(){
-        return costPerLiter*2.5;
+    private double setStaringSalesPrice() {
+        return costPerLiter * 2.5;
     }
-    
+
     public IceCreamFridgeItem() {
         this.costPerLiter = 1;
         this.iceCreamFlavor = "Chocolate";
         this.salePricePerLiter = setStaringSalesPrice();
+        this.stockInLiters = 1;
+    }
+    
+    public IceCreamFridgeItem(String flavor, String stock, String cost, String sale){
+        setFlavor(flavor);
+        setStockWithString(stock);
+        setCostWithString(cost);
+        setSalePriceWithString(sale); 
     }
     
     
-    public IceCreamFridgeItem(double costPerLiter, String flavor) {
-        this.costPerLiter = costPerLiter;
-        this.iceCreamFlavor = flavor;
-        this.salePricePerLiter = setStaringSalesPrice();
-    }
-
-    public IceCreamFridgeItem(double costPerLiter, double quantityInLiters, String flavor) {
-        this.costPerLiter = costPerLiter;
-        this.stockInLiters = quantityInLiters;
-        this.iceCreamFlavor = flavor;
-        this.salePricePerLiter = setStaringSalesPrice();
+    private Double stringToDouble(String input) {
+        try {
+            return Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
     }
 
     public double getCostPerLiter() {
@@ -57,20 +59,74 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
         return salePricePerLiter;
     }
 
-    public double getQuantityInLiters() {
+    public double getStockInLiters() {
         return stockInLiters;
     }
 
     public String getFlavor() {
         return iceCreamFlavor;
     }
+
+    public Boolean setFlavor(String value) {
+        // Limiting the length of the name to 30 characters
+        if (value.length() < 31) {
+            iceCreamFlavor = value;
+            return true;
+        } else {
+            return false;
+        }
+    }
     
-    public Boolean updateCurrentStock(double value){
-    
+    public Boolean setSalePriceWithString(String value){
+       Double toUpdate = stringToDouble(value);
+        if (toUpdate == 0.0) {
+            return false;
+        } else {
+            return setSalePrice(toUpdate);
+        }   
+    }
+
+    public Boolean setSalePrice(Double value) {
+        if (value < costPerLiter) {
+            return false;
+        } else {
+            salePricePerLiter = value;
+            return true;
+        }
+
+    }
+
+    public Boolean setCostWithString(String value) {
+        Double toUpdate = stringToDouble(value);
+        if (toUpdate == 0.0) {
+            return false;
+        } else {
+            return setCost(toUpdate);
+        }
+    }
+
+    public Boolean setCost(Double value) {
+        if (value > this.salePricePerLiter) {
+            return false;
+        } else {
+            this.costPerLiter = value;
+            return true;
+        }
+    }
+
+    public Boolean setStockWithString(String value) {
+        Double toUpdate = stringToDouble(value);
+        if (toUpdate == 0.0) {
+            return false;
+        } else {
+            return setStock(toUpdate);
+        }
+    }
+
+    public Boolean setStock(double value) {
         if (stockInLiters + value < 0) {
             return false;
         }
-        
         stockInLiters += value;
         return true;
     }
@@ -83,8 +139,15 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
         }
         return 1;
     }
-        
     
-    
-    
+    /**
+     * Provides access to the string representation of this IceCream.
+     * 
+     * @return String - this iceCream's name 
+     */
+    @Override
+    public String toString() {
+        return iceCreamFlavor;
+    }
+
 }
