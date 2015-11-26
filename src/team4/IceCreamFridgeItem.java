@@ -24,25 +24,20 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
     private double costPerLiter;
     private double salePricePerLiter;
 
-    private double setStaringSalesPrice() {
-        return costPerLiter * 2.5;
-    }
-
     public IceCreamFridgeItem() {
         this.costPerLiter = 1;
         this.iceCreamFlavor = "Chocolate";
-        this.salePricePerLiter = setStaringSalesPrice();
+        this.salePricePerLiter = 2.5; // 2.5x is the usual list price for sales iteams
         this.stockInLiters = 1;
     }
-    
-    public IceCreamFridgeItem(String flavor, String stock, String cost, String sale){
+
+    public IceCreamFridgeItem(String flavor, String stock, String cost, String sale) {
         setFlavor(flavor);
         setStockWithString(stock);
         setCostWithString(cost);
-        setSalePriceWithString(sale); 
+        setSalePriceWithString(sale);
     }
-    
-    
+
     private Double stringToDouble(String input) {
         try {
             return Double.parseDouble(input);
@@ -76,15 +71,15 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
             return false;
         }
     }
-    
-    public Boolean setSalePriceWithString(String value){
-       Double toUpdate = stringToDouble(value);
+
+    public Boolean setSalePriceWithString(String value) {
+        Double toUpdate = stringToDouble(value);
         if (toUpdate == 0.0) {
-            
+
             return false;
         } else {
             return setSalePrice(toUpdate);
-        }   
+        }
     }
 
     public Boolean setSalePrice(Double value) {
@@ -142,11 +137,11 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
         }
         return 1;
     }
-    
+
     /**
      * Provides access to the string representation of this IceCream.
-     * 
-     * @return String - this iceCream's name 
+     *
+     * @return String - this iceCream's name
      */
     @Override
     public String toString() {

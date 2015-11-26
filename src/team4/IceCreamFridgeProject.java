@@ -7,7 +7,7 @@ package team4;
 
 /**
  *
- * @author SZE LOK TAM 
+ * @author SZE LOK TAM
  * @author FRANCESKA S ONG
  * @author JOSE E JIMENEZ
  */
@@ -23,5 +23,5 @@ public class IceCreamFridgeProject {
         view.setLocation(200, 200);
         view.setVisible(true);
     }
-    
+
 }

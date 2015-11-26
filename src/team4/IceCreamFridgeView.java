@@ -41,6 +41,12 @@ public class IceCreamFridgeView extends JFrame {
         
     }
     
+    private void showErrorMessage(String message ){
+     JOptionPane.showMessageDialog(IceCreamFridgeView.this, message);
+
+    }
+    
+    
     private void addWindowComponents() {
         // make combo box
         itemNames = new JComboBox<>(iceCreams.getSortedArray());
@@ -119,10 +125,10 @@ public class IceCreamFridgeView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!txtFlavors.getText().isEmpty()) {
                     IceCreamFridgeItem c = (IceCreamFridgeItem) itemNames.getSelectedItem();
-                    c.setFlavor(txtFlavors.getText());
-                    c.setStockWithString(txtStock.getText());
-                    c.setCostWithString(txtCostPrice.getText());
-                    c.setSalePriceWithString(txtSalePrice.getText());
+                        if (!c.setFlavor(txtFlavors.getText())){ showErrorMessage("Flavor name is too long");}
+                        if (!c.setStockWithString(txtStock.getText())){showErrorMessage("Invalid Stock number entered");}
+                        if (!c.setCostWithString(txtCostPrice.getText())){showErrorMessage("Invalid Cost value entered");}
+                        if (!c.setSalePriceWithString(txtSalePrice.getText())){showErrorMessage("Invalid Sale Price entered");}
                     itemNames.updateUI();
                 }
             }
@@ -146,9 +152,11 @@ public class IceCreamFridgeView extends JFrame {
                     txtFlavors.requestFocus();
                 } else {
                     if (!txtFlavors.getText().isEmpty()) {
-                        IceCreamFridgeItem c = new IceCreamFridgeItem(txtFlavors.getText(),
-                                txtStock.getText(), txtCostPrice.getText(), txtSalePrice.getText());
-                        iceCreams.addIceCream(c);
+                        IceCreamFridgeItem c = new IceCreamFridgeItem();
+                        if (!c.setFlavor(txtFlavors.getText())){ showErrorMessage("Flavor name is too long");}
+                        if (!c.setStockWithString(txtStock.getText())){showErrorMessage("Invalid Stock number entered");}
+                        if (!c.setCostWithString(txtCostPrice.getText())){showErrorMessage("Invalid Cost value entered");}
+                        if (!c.setSalePriceWithString(txtSalePrice.getText())){showErrorMessage("Invalid Sale Price entered");}
                         itemNames.setModel(new DefaultComboBoxModel(
                                 iceCreams.getSortedArray()));
                         itemNames.setSelectedItem(c);
