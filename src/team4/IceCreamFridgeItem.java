@@ -80,6 +80,7 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
     public Boolean setSalePriceWithString(String value){
        Double toUpdate = stringToDouble(value);
         if (toUpdate == 0.0) {
+            
             return false;
         } else {
             return setSalePrice(toUpdate);
@@ -88,6 +89,7 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
 
     public Boolean setSalePrice(Double value) {
         if (value < costPerLiter) {
+            salePricePerLiter = costPerLiter; // Sets the sale price to even price
             return false;
         } else {
             salePricePerLiter = value;
@@ -106,7 +108,8 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
     }
 
     public Boolean setCost(Double value) {
-        if (value > this.salePricePerLiter) {
+        if (value > salePricePerLiter && (salePricePerLiter > 0)) {
+            costPerLiter = salePricePerLiter; //Sets the cost price to even sale price
             return false;
         } else {
             this.costPerLiter = value;

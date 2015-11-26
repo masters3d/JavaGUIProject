@@ -101,12 +101,14 @@ public class IceCreamFridgeView extends JFrame {
                     IceCreamFridgeItem c = (IceCreamFridgeItem) itemNames.getSelectedItem();
                     if (c != null) {
                         txtFlavors.setText(c.getFlavor());
-                        txtStock.setText(Double.toString(c.getCostPerLiter()));
+                        txtStock.setText(Double.toString(c.getStockInLiters()));
                         txtCostPrice.setText(Double.toString(c.getCostPerLiter()));
+                        txtSalePrice.setText(Double.toString(c.getSalePricePerLiter()));
                     } else {
                         txtFlavors.setText("");
                         txtStock.setText("");
-                        txtCostPrice.setText("");    
+                        txtCostPrice.setText("");  
+                        txtSalePrice.setText("");
                     }
                 }
             }
@@ -193,6 +195,7 @@ public class IceCreamFridgeView extends JFrame {
             btnUpdate.setEnabled(false);
             btnDelete.setEnabled(false);
             btnNew.doClick();
+            
         }
     }
     
