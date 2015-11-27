@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package team4;
 
 /**
- *
+ * Launcher for Ice Cream Fridge Project
+ * 
  * @author SZE LOK TAM
  * @author FRANCESKA S ONG
  * @author JOSE E JIMENEZ
+ * @version Dec 2015
  */
 public class IceCreamFridgeProject {
 

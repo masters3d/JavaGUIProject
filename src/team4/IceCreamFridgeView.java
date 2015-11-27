@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package team4;
 
 import java.awt.*;
@@ -11,10 +6,12 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
+ * Presentation layer for Ice Cream Fridge
  *
  * @author SZE LOK TAM
  * @author FRANCESKA S ONG
  * @author JOSE E JIMENEZ
+ * @version Dec 2015
  */
 public class IceCreamFridgeView extends JFrame {
 
@@ -34,6 +31,14 @@ public class IceCreamFridgeView extends JFrame {
     private final String errorMsgCostPrice = "Invalid Cost value entered";
     private final String errorMsgSalePrice = "Invalid Sale Price entered";
 
+     /**
+     * The constructor that creates the JFrame and calls the other methods
+     * of this class to build the GUI, wire the components, and initialize
+     * the display.
+     * 
+     * @param title the title of the underlying JFrame
+     */
+    
     public IceCreamFridgeView(String title) {
         super(title);
         iceCreams = new IceCreamFridgeManager();
@@ -45,11 +50,20 @@ public class IceCreamFridgeView extends JFrame {
 
     }
 
+     /**
+     * Show errors based on the message string
+     * 
+     * @param message message to display
+     */   
     private void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(IceCreamFridgeView.this, message);
-
     }
 
+    
+    /**
+     * Builds the GUI containers and components.
+     */
+    
     private void addWindowComponents() {
         // make combo box
         itemNames = new JComboBox<>(iceCreams.getSortedArray());

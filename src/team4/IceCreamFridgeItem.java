@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package team4;
 
 import java.io.Serializable;
-import static java.lang.Math.abs;
 
 /**
  * Single-item instantiable class for IceCreamFridgeProject, representing one
@@ -16,14 +10,22 @@ import static java.lang.Math.abs;
  * @author SZE LOK TAM
  * @author FRANCESKA S ONG
  * @author JOSE E JIMENEZ
+ * @version Dec 2015
  */
 public class IceCreamFridgeItem implements Comparable, Serializable {
 
+     /**
+     * Internal fields to keep track of name, stock, cost and sales price. 
+     */
+    
     private String iceCreamFlavor;
     private double stockInLiters;
     private double costPerLiter;
     private double salePricePerLiter;
 
+    /**
+     * Default constructor with some starting data that will get rewritten
+     */
     public IceCreamFridgeItem() {
         this.costPerLiter = 1;
         this.iceCreamFlavor = "Chocolate";
@@ -31,6 +33,13 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
         this.stockInLiters = 1;
     }
 
+    /**
+     *  Constructor
+     * @param flavor is the name of the icreCream
+     * @param stock is the current stock level in 
+     * @param cost current cost of buying the ice cream
+     * @param sale Sale price for the iceCream
+     */
     public IceCreamFridgeItem(String flavor, String stock, String cost, String sale) {
         setFlavor(flavor);
         setStockWithString(stock);
@@ -38,6 +47,13 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
         setSalePriceWithString(sale);
     }
 
+     /**
+     * Helper method that helps to convert the string to doubles and caching the
+     * exception by return a default value.
+     * @param input the string value being converted to double
+     * @return double returns the value converted or Zero.
+     */
+    
     private Double stringToDouble(String input) {
         try {
             return Double.parseDouble(input);
@@ -46,22 +62,43 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
         }
     }
 
+    /**
+     * Gets the cost per liter
+     * @return Double with cost per liter
+     */
     public double getCostPerLiter() {
         return costPerLiter;
     }
 
+    /**
+     * get the Sale price
+     * @return double with sale price per liter
+     */
     public double getSalePricePerLiter() {
         return salePricePerLiter;
     }
 
+    /**
+     * Gets the current stock in liters
+     * @return double of the stock
+     */
     public double getStockInLiters() {
         return stockInLiters;
     }
 
+    /**
+     * Gets the flavor name
+     * @return a string of the name of iceCream
+     */
     public String getFlavor() {
         return iceCreamFlavor;
     }
 
+    /**
+     * Sets the flavor name
+     * @param value the string to set the flavor
+     * @return true or false if the if it was successful
+     */
     public Boolean setFlavor(String value) {
         // Limiting the length of the name to 30 characters
         if (value.length() < 31) {
@@ -72,6 +109,11 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
         }
     }
 
+    /**
+     * This sets the sale price using a string
+     * @param value the string to set the sale price. It gets converted to double
+     * @return true or false if the if it was successful
+     */
     public Boolean setSalePriceWithString(String value) {
         Double toUpdate = stringToDouble(value);
         if (toUpdate == 0.0) {
@@ -82,6 +124,11 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
         }
     }
 
+    /**
+     * This sets the sale price
+     * @param value the string to set the sale price. 
+     * @return true or false if the if it was successful
+     */
     public Boolean setSalePrice(Double value) {
         if (value < costPerLiter) {
             salePricePerLiter = costPerLiter; // Sets the sale price to even price
@@ -93,6 +140,11 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
 
     }
 
+    /**
+     * Sets the cost using a string that gets comverted to a double
+     * @param value string valued to need to be parsed to a double
+     * @return true or false if the if it was successful
+     */
     public Boolean setCostWithString(String value) {
         Double toUpdate = stringToDouble(value);
         if (toUpdate == 0.0) {
@@ -102,6 +154,11 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
         }
     }
 
+    /**
+     * Sets the cost of the iceCream
+     * @param value double that gets set
+     * @return true or false if the if it was successful
+     */
     public Boolean setCost(Double value) {
         if (value > salePricePerLiter && (salePricePerLiter > 0)) {
             costPerLiter = salePricePerLiter; //Sets the cost price to even sale price
@@ -112,6 +169,11 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
         }
     }
 
+    /**
+     * Sets the stock using a string
+     * @param value string gets converted to double
+     * @return true or false if the if it was successful
+     */
     public Boolean setStockWithString(String value) {
         Double toUpdate = stringToDouble(value);
         if (toUpdate == 0.0) {
@@ -121,6 +183,11 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
         }
     }
 
+    /**
+     * Sets the stock value, does not accept negative values
+     * @param value double used to update the stock value
+     * @return true or false if the if it was successful
+     */
     public Boolean setStock(double value) {
         if (stockInLiters + value < 0) {
             return false;
