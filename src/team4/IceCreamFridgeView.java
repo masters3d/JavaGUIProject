@@ -12,11 +12,12 @@ import javax.swing.*;
 
 /**
  *
- * @author SZE LOK TAM 
+ * @author SZE LOK TAM
  * @author FRANCESKA S ONG
  * @author JOSE E JIMENEZ
  */
 public class IceCreamFridgeView extends JFrame {
+
     private Container container;
     private IceCreamFridgeManager iceCreams;
     private JComboBox<IceCreamFridgeItem> itemNames;
@@ -28,25 +29,27 @@ public class IceCreamFridgeView extends JFrame {
     private JButton btnUpdate;
     private JButton btnDelete;
     private JButton btnSave;
+    private final String errorMsgFlavors = "Flavor name is too long";
+    private final String errorMsgStock = "Invalid Stock number entered";
+    private final String errorMsgCostPrice = "Invalid Cost value entered";
+    private final String errorMsgSalePrice = "Invalid Sale Price entered";
 
-    public IceCreamFridgeView(String title)
-    {
+    public IceCreamFridgeView(String title) {
         super(title);
         iceCreams = new IceCreamFridgeManager();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         container = this.getContentPane();
-        addWindowComponents();      
+        addWindowComponents();
         addEventHandlers();
         initializeDisplay();
-        
-    }
-    
-    private void showErrorMessage(String message ){
-     JOptionPane.showMessageDialog(IceCreamFridgeView.this, message);
 
     }
-    
-    
+
+    private void showErrorMessage(String message) {
+        JOptionPane.showMessageDialog(IceCreamFridgeView.this, message);
+
+    }
+
     private void addWindowComponents() {
         // make combo box
         itemNames = new JComboBox<>(iceCreams.getSortedArray());
@@ -59,7 +62,7 @@ public class IceCreamFridgeView extends JFrame {
         btnSave = new JButton("Save");
         pnlButtons.add(btnNew);
         pnlButtons.add(btnUpdate);
-        pnlButtons.add(btnSave);    
+        pnlButtons.add(btnSave);
         pnlButtons.add(btnDelete);
         container.add(pnlButtons, BorderLayout.SOUTH);
         // fields
@@ -91,10 +94,10 @@ public class IceCreamFridgeView extends JFrame {
         pnlFields.add(pnlCostPrice);
         pnlFields.add(pnlSalePrice);
         // add to container
-        container.add(pnlFields, BorderLayout.CENTER);      
-    }	
-    
-        /**
+        container.add(pnlFields, BorderLayout.CENTER);
+    }
+
+    /**
      * Creates event handlers for the combo box and buttons.
      */
     private void addEventHandlers() {
@@ -113,7 +116,7 @@ public class IceCreamFridgeView extends JFrame {
                     } else {
                         txtFlavors.setText("");
                         txtStock.setText("");
-                        txtCostPrice.setText("");  
+                        txtCostPrice.setText("");
                         txtSalePrice.setText("");
                     }
                 }
@@ -125,10 +128,18 @@ public class IceCreamFridgeView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!txtFlavors.getText().isEmpty()) {
                     IceCreamFridgeItem c = (IceCreamFridgeItem) itemNames.getSelectedItem();
-                        if (!c.setFlavor(txtFlavors.getText())){ showErrorMessage("Flavor name is too long");}
-                        if (!c.setStockWithString(txtStock.getText())){showErrorMessage("Invalid Stock number entered");}
-                        if (!c.setCostWithString(txtCostPrice.getText())){showErrorMessage("Invalid Cost value entered");}
-                        if (!c.setSalePriceWithString(txtSalePrice.getText())){showErrorMessage("Invalid Sale Price entered");}
+                    if (!c.setFlavor(txtFlavors.getText())) {
+                        showErrorMessage(errorMsgFlavors);
+                    }
+                    if (!c.setStockWithString(txtStock.getText())) {
+                        showErrorMessage(errorMsgStock);
+                    }
+                    if (!c.setCostWithString(txtCostPrice.getText())) {
+                        showErrorMessage(errorMsgCostPrice);
+                    }
+                    if (!c.setSalePriceWithString(txtSalePrice.getText())) {
+                        showErrorMessage(errorMsgSalePrice);
+                    }
                     itemNames.updateUI();
                 }
             }
@@ -153,10 +164,18 @@ public class IceCreamFridgeView extends JFrame {
                 } else {
                     if (!txtFlavors.getText().isEmpty()) {
                         IceCreamFridgeItem c = new IceCreamFridgeItem();
-                        if (!c.setFlavor(txtFlavors.getText())){ showErrorMessage("Flavor name is too long");}
-                        if (!c.setStockWithString(txtStock.getText())){showErrorMessage("Invalid Stock number entered");}
-                        if (!c.setCostWithString(txtCostPrice.getText())){showErrorMessage("Invalid Cost value entered");}
-                        if (!c.setSalePriceWithString(txtSalePrice.getText())){showErrorMessage("Invalid Sale Price entered");}
+                        if (!c.setFlavor(txtFlavors.getText())) {
+                            showErrorMessage(errorMsgFlavors);
+                        }
+                        if (!c.setStockWithString(txtStock.getText())) {
+                            showErrorMessage(errorMsgStock);
+                        }
+                        if (!c.setCostWithString(txtCostPrice.getText())) {
+                            showErrorMessage(errorMsgCostPrice);
+                        }
+                        if (!c.setSalePriceWithString(txtSalePrice.getText())) {
+                            showErrorMessage(errorMsgSalePrice);
+                        }
                         itemNames.setModel(new DefaultComboBoxModel(
                                 iceCreams.getSortedArray()));
                         itemNames.setSelectedItem(c);
@@ -203,10 +222,8 @@ public class IceCreamFridgeView extends JFrame {
             btnUpdate.setEnabled(false);
             btnDelete.setEnabled(false);
             btnNew.doClick();
-            
+
         }
     }
-    
-    
-    
+
 }

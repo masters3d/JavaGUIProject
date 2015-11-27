@@ -15,18 +15,17 @@ import java.util.Collections;
 
 /**
  *
- * @author SZE LOK TAM 
+ * @author SZE LOK TAM
  * @author FRANCESKA S ONG
  * @author JOSE E JIMENEZ
  */
-
 public class IceCreamFridgeManager {
-    
+
     private ArrayList<IceCreamFridgeItem> iceCreamList;
-    
+
     private String fileLocation = "iceCream.ser";
-    
-     /**
+
+    /**
      * The default constructor.
      */
     public IceCreamFridgeManager() {
@@ -34,9 +33,6 @@ public class IceCreamFridgeManager {
         readCollection();
     }
 
-
-    
-    
     /**
      * Adds the given IceCream to the list if it does not exist already.
      *
@@ -64,7 +60,8 @@ public class IceCreamFridgeManager {
     /**
      * Sorts the current list of IceCreams and converts it to an array.
      *
-     * @return IceCreamFridgeItem[] the current list of IceCreams as a sorted array
+     * @return IceCreamFridgeItem[] the current list of IceCreams as a sorted
+     * array
      */
     public IceCreamFridgeItem[] getSortedArray() {
         Collections.sort(iceCreamList);
@@ -93,8 +90,8 @@ public class IceCreamFridgeManager {
 
     /**
      * Populates the IceCreams list with the serialized file contents.
-     * 
-     * @return boolean - true if successful, false if not 
+     *
+     * @return boolean - true if successful, false if not
      */
     private boolean readCollection() {
         boolean success = true;
@@ -114,9 +111,4 @@ public class IceCreamFridgeManager {
         return success;
     }
 
-    
-    
-    
-    
-    
 }
