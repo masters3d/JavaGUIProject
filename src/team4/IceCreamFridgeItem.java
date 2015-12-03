@@ -1,6 +1,7 @@
 package team4;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Single-item instantiable class for IceCreamFridgeProject, representing one
@@ -20,32 +21,17 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
     
     private String iceCreamFlavor;
     private double stockInLiters;
-    private double costPerLiter;
     private double salePricePerLiter;
 
     /**
      * Default constructor with some starting data that will get rewritten
      */
     public IceCreamFridgeItem() {
-        this.costPerLiter = 1;
         this.iceCreamFlavor = "Chocolate";
         this.salePricePerLiter = 2.5; // 2.5x is the usual list price for sales iteams
         this.stockInLiters = 1;
     }
 
-    /**
-     *  Constructor
-     * @param flavor is the name of the icreCream
-     * @param stock is the current stock level in 
-     * @param cost current cost of buying the ice cream
-     * @param sale Sale price for the iceCream
-     */
-    public IceCreamFridgeItem(String flavor, String stock, String cost, String sale) {
-        setFlavor(flavor);
-        setStockWithString(stock);
-        setCostWithString(cost);
-        setSalePriceWithString(sale);
-    }
 
      /**
      * Helper method that helps to convert the string to doubles and caching the
@@ -62,13 +48,6 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
         }
     }
 
-    /**
-     * Gets the cost per liter
-     * @return Double with cost per liter
-     */
-    public double getCostPerLiter() {
-        return costPerLiter;
-    }
 
     /**
      * get the Sale price
@@ -130,8 +109,7 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
      * @return true or false if the if it was successful
      */
     public Boolean setSalePrice(Double value) {
-        if (value < costPerLiter) {
-            salePricePerLiter = costPerLiter; // Sets the sale price to even price
+        if (value < 0) {
             return false;
         } else {
             salePricePerLiter = value;
@@ -140,34 +118,6 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
 
     }
 
-    /**
-     * Sets the cost using a string that gets comverted to a double
-     * @param value string valued to need to be parsed to a double
-     * @return true or false if the if it was successful
-     */
-    public Boolean setCostWithString(String value) {
-        Double toUpdate = stringToDouble(value);
-        if (toUpdate == 0.0) {
-            return false;
-        } else {
-            return setCost(toUpdate);
-        }
-    }
-
-    /**
-     * Sets the cost of the iceCream
-     * @param value double that gets set
-     * @return true or false if the if it was successful
-     */
-    public Boolean setCost(Double value) {
-        if (value > salePricePerLiter && (salePricePerLiter > 0)) {
-            costPerLiter = salePricePerLiter; //Sets the cost price to even sale price
-            return false;
-        } else {
-            this.costPerLiter = value;
-            return true;
-        }
-    }
 
     /**
      * Sets the stock using a string
@@ -189,10 +139,10 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
      * @return true or false if the if it was successful
      */
     public Boolean setStock(double value) {
-        if (stockInLiters + value < 0) {
+        if (value < 0) {
             return false;
         }
-        stockInLiters += value;
+        stockInLiters = value;
         return true;
     }
 
@@ -214,5 +164,43 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
     public String toString() {
         return iceCreamFlavor;
     }
+    
+     /**
+     * Defines what it means to have two iceCreams that are equal.
+     * Set to just compare names so that the same name cannot
+     * be added twice.
+     * 
+     * @param obj the contact to compare this one to.
+     * 
+     * @return boolean - true if equal, false if not 
+     */
+
+    @Override
+    public boolean equals(Object obj) {
+                if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final IceCreamFridgeItem other = (IceCreamFridgeItem) obj;
+        if (!Objects.equals(this.iceCreamFlavor, other.iceCreamFlavor)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + Objects.hashCode(this.iceCreamFlavor);
+        hash = 31 * hash + Objects.hashCode(this.stockInLiters);
+        hash = 31 * hash + Objects.hashCode(this.salePricePerLiter);
+        return hash;
+        
+    }
+    
+    
+    
 
 }
