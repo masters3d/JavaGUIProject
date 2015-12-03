@@ -10,11 +10,11 @@ import java.util.Collections;
 
 /**
  * Instantiable class managing a collection of contacts for IceCream
- * 
+ *
  * @author SZE LOK TAM
  * @author FRANCESKA S ONG
  * @author JOSE E JIMENEZ
- *  @version Dec 2015
+ * @version Dec 2015
  */
 public class IceCreamFridgeManager {
 
@@ -30,10 +30,72 @@ public class IceCreamFridgeManager {
         readCollection();
     }
 
+    public IceCreamFridgeItem getMostExpensiveIceCream() {
+        if (iceCreamList.isEmpty()) {
+            return new IceCreamFridgeItem();
+        }
+        IceCreamFridgeItem temp = iceCreamList.get(0);
+
+        for (int i = 0; i < iceCreamList.size(); i++) {
+            if (iceCreamList.get(i).getSalePricePerLiter() > temp.getSalePricePerLiter()) {
+                temp = iceCreamList.get(i);
+            }
+        }
+        return temp;
+
+    }
+
+    public IceCreamFridgeItem getMostInStockIceCream() {
+
+        if (iceCreamList.isEmpty()) {
+            return new IceCreamFridgeItem();
+        }
+
+        IceCreamFridgeItem temp = iceCreamList.get(0);
+
+        for (int i = 0; i < iceCreamList.size(); i++) {
+            if (iceCreamList.get(i).getStockInLiters() > temp.getStockInLiters()) {
+                temp = iceCreamList.get(i);
+            }
+        }
+        return temp;
+    }
+
+    public Double getTotalPotentialSales() {
+
+        if (iceCreamList.isEmpty()) {
+            return 0.0;
+        }
+
+        Double sum = 0.0;
+
+        for (int i = 0; i < iceCreamList.size(); i++) {
+            sum += iceCreamList.get(i).getPotencialSales();
+        }
+        return sum;
+
+    }
+
+    public Double getTotalStock() {
+
+        if (iceCreamList.isEmpty()) {
+            return 0.0;
+        }
+
+        Double sum = 0.0;
+
+        for (int i = 0; i < iceCreamList.size(); i++) {
+            sum += iceCreamList.get(i).getStockInLiters();
+        }
+        return sum;
+
+    }
+
     /**
      * Adds the given IceCream to the list if it does not exist already.
      *
      * @param c the IceCream to add
+     * @return True or False depending if the write is successful
      */
     public boolean addIceCream(IceCreamFridgeItem c) {
         boolean success = false;

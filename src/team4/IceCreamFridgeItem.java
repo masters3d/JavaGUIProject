@@ -32,7 +32,11 @@ public class IceCreamFridgeItem implements Comparable, Serializable {
         this.stockInLiters = 1;
     }
 
-
+    public Double getPotencialSales(){
+        return stockInLiters * salePricePerLiter;
+    }
+    
+    
      /**
      * Helper method that helps to convert the string to doubles and caching the
      * exception by return a default value.
