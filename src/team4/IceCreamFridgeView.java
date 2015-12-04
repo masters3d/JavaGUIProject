@@ -226,12 +226,14 @@ public class IceCreamFridgeView extends JFrame {
                             "Confirmation",
                             JOptionPane.YES_NO_OPTION);
                     if (answer == JOptionPane.YES_OPTION) {
+                        iceCreams.clearAllObjects();
                         itemNames.removeItemAt(itemNames.getSelectedIndex());
                         iceCreams.deleteIceCream((IceCreamFridgeItem) itemNames.getSelectedItem());
                         itemNames.updateUI();
                     }
                 }
                 if (itemNames.getItemCount() == 0) {
+                    
                     btnNew.doClick();
                 }
             }

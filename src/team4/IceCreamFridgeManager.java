@@ -169,5 +169,10 @@ public class IceCreamFridgeManager {
         }
         return success;
     }
+    
+    public void clearAllObjects()
+    {
+        iceCreamList.clear();
+    }
 
 }
