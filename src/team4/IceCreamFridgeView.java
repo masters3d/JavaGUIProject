@@ -22,14 +22,17 @@ public class IceCreamFridgeView extends JFrame {
     private JTextField txtFlavor;
     private JTextField txtStock;
     private JTextField txtSalePrice;
-    private JLabel lblFlavor;
     private JButton btnNew;
     private JButton btnUpdate;
     private JButton btnDelete;
+    private final static String newline = "\n";
+    private final JLabel nuLine = new JLabel(" ");
+    private final JLabel lblTitle = new JLabel("Ice Cream Fridge Program");
+    private final JLabel lblNames = new JLabel("By: Jose Jimenez, Franceska Ong, Sze Lok Tam ");
     private final String errorMsgFlavors = "Flavor name is too long";
     private final String errorMsgStock = "Invalid Stock number entered";
     private final String errorMsgSalePrice = "Invalid Sale Price entered";
-    private final static String newline = "\n";
+
 
      /**
      * The constructor that creates the JFrame and calls the other methods
@@ -67,6 +70,7 @@ public class IceCreamFridgeView extends JFrame {
     private void addWindowComponents() {
         // main panel
         JPanel mainPanel = new JPanel();
+        JPanel titlePanel = new JPanel();
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
         JPanel rightPnlFields = new JPanel();
@@ -90,32 +94,40 @@ public class IceCreamFridgeView extends JFrame {
         //Flavor of the ice cream
         JPanel pnlFlavor = new JPanel();
         pnlFlavor.add(new JLabel("Ice Cream Flavor: "));
-        txtFlavor = new JTextField(25);
+        txtFlavor = new JTextField(15);
         pnlFlavor.add(txtFlavor);
         
         //Stock of the ice cream
         JPanel pnlStock = new JPanel();
         pnlStock.add(new JLabel("     Current Stock: "));
-        txtStock = new JTextField(25);
+        txtStock = new JTextField(15);
         pnlStock.add(txtStock);
         //Sale Price of the ice cream
         JPanel pnlSalePrice = new JPanel();
-        pnlSalePrice.add(new JLabel("             Sale Price: "));
-        txtSalePrice = new JTextField(25);
+        pnlSalePrice.add(new JLabel("           Sale Price: "));
+        txtSalePrice = new JTextField(15);
         pnlSalePrice.add(txtSalePrice);
-        //add to pnlFields
+        //add to right panel
+        // set fonts for title and names
+        lblTitle.setFont(new Font("Arial", Font.BOLD, 15));
+        lblNames.setFont(new Font("Arial", Font.BOLD, 12));
+        rightPnlFields.add(lblTitle);
+        rightPnlFields.add(lblNames);
+        rightPnlFields.add(nuLine);
         rightPnlFields.add(pnlFlavor);
         rightPnlFields.add(pnlStock);
         rightPnlFields.add(pnlSalePrice);
         // make textarea
-        textArea = new JTextArea(5,20);
+        textArea = new JTextArea(10,18);
         textArea.setEditable(false);
 
         // add to left side
         leftPnlFields.add(textArea);
         //add to container
+
         
         rightPanel.add(rightPnlFields, BorderLayout.CENTER);
+        
         leftPanel.add(leftPnlFields, BorderLayout.CENTER);
         mainPanel.add(leftPanel, BorderLayout.WEST);
         mainPanel.add(rightPanel, BorderLayout.EAST);
@@ -157,13 +169,12 @@ public class IceCreamFridgeView extends JFrame {
         btnUpdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                IceCreamFridgeItem c = (IceCreamFridgeItem) itemNames.getSelectedItem();
+                String flavor = c.getFlavor();
+                String price = Double.toString(c.getSalePricePerLiter());
+                String stock = Double.toString(c.getStockInLiters());
                 if (!txtFlavor.getText().isEmpty()) {
-                    IceCreamFridgeItem c = (IceCreamFridgeItem) itemNames.getSelectedItem();
-                    String flavor = c.getFlavor();
-                    String price = Double.toString(c.getSalePricePerLiter());
-                    String stock = Double.toString(c.getStockInLiters());
-                    textArea.setText(null);
-                    UpdateTxtArea(flavor, stock, price);
+
                     if (!c.setFlavor(txtFlavor.getText())) {
                         showErrorMessage(errorMsgFlavors);
                     }
@@ -174,7 +185,8 @@ public class IceCreamFridgeView extends JFrame {
                         showErrorMessage(errorMsgSalePrice);
                     }
                     itemNames.updateUI();
-
+                    textArea.setText(null);
+                    UpdateTxtArea(flavor, stock, price);
                 }
             }
         });
@@ -261,8 +273,7 @@ public class IceCreamFridgeView extends JFrame {
     
     private void UpdateTxtArea(String flavor, String stock, String price)
     {
-
-        textArea.append("Ice Cream Flavor: " + flavor + newline + newline);
+        textArea.append(newline + "Ice Cream Flavor: " + flavor + newline + newline);
         textArea.append("Current Stock Available: " + stock + newline + newline);
         textArea.append("Sale Price of item: " + price + newline + newline );
     }
